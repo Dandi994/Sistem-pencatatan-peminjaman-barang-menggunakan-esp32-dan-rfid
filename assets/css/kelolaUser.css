@@ -1,0 +1,46 @@
+body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            color: white;
+            width: 250px;
+            height: 100vh;
+            background-color: #372160;
+            position: fixed;
+            top: 75px;
+            left: 0;
+            padding-top: 20px;
+        }
+
+        .content {
+            margin-left: 250px;
+            margin-top: 55px;
+            padding: 40px;
+        }
+
+
+        .form-container {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: auto;
+            position: relative;
+        }
+
+        .submit-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 40px;
+        }
+
+        .table-responsive {
+            margin-top: 30px;
+        }
+
+        .form-container h5 {
+            margin-bottom: 20px;
+        }
