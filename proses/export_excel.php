@@ -29,9 +29,9 @@ $headers = [
     'No',
     'UID',
     'Kelas',
+    'Semester',
     'Kode Barang',
     'Nama Barang',
-    'Semester',
     'Tgl Peminjaman',
     'Tgl Pengembalian',
     'Status'
@@ -63,9 +63,9 @@ while ($data = mysqli_fetch_assoc($query)) {
         $no++,
         $data['uid'],
         $data['kelas'],
+        $data['semester'],
         $data['kode_barang'],
         $data['nama_barang'],
-        $data['semester'],
         $data['tgl_peminjaman'],
         $data['tgl_pengembalian'],
         $data['status']
