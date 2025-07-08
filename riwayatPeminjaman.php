@@ -76,6 +76,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                                 <th>No</th>
                                 <th>Id Peminjam</th>
                                 <th>Kelas</th>
+                                <th>Semester</th>
                                 <th>Kode Barang</th>
                                 <th>Nama Barang</th>
                                 <th>Tanggal Peminjaman</th>

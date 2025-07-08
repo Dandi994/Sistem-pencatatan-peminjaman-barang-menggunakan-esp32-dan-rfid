@@ -12,6 +12,7 @@ function loadAllPeminjaman() {
                                 <td>${index + 1}</td>
                                 <td>${item.uid}</td>
                                 <td>${item.kelas}</td>
+                                <td>${item.semester}</td>
                                 <td>${item.kode_barang}</td>
                                 <td>${item.nama_barang}</td>
                                 <td>${item.tgl_peminjaman}</td>
@@ -88,6 +89,7 @@ function loadAllPeminjaman() {
                             <td>${index + 1}</td>
                             <td>${item.uid}</td>
                             <td>${item.kelas}</td>
+                            <td>${item.semester}</td>
                             <td>${item.kode_barang}</td>
                             <td>${item.nama_barang}</td>
                             <td>${item.tgl_peminjaman}</td>
