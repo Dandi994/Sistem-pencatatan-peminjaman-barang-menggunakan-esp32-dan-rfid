@@ -51,8 +51,8 @@ mysqli_query($koneksi, "DELETE FROM card_temp");
                         <th>No</th>
                         <th>Id Peminjam</th>
                         <th>Kelas</th>
-                        <th>Kode Barang</th>
                         <th>Nama Barang</th>
+                        <th>Jumlah</th>
                         <th>Tanggal Peminjaman</th>
                         <th>Tanggal Pengembalian</th>
                         <th>Status</th>

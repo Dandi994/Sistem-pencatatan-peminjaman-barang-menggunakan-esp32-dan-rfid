@@ -6,10 +6,17 @@ if (isset($_POST['id'])) {
     $id = $_POST['id'];
     $tgl_sekarang = date('Y-m-d H:i:s');
 
-    // Ambil kode_barang untuk mengupdate tb_barang nanti
-    $get_barang = mysqli_query($koneksi, "SELECT kode_barang FROM tb_peminjaman WHERE id = '$id'");
-    $data_barang = mysqli_fetch_assoc($get_barang);
-    $kode_barang = $data_barang['kode_barang'] ?? null;
+    // Ambil id_barang dan jumlah dari peminjaman
+    $get_data = mysqli_query($koneksi, "SELECT kode_barang, jumlah FROM tb_peminjaman WHERE id = '$id'");
+    $row = mysqli_fetch_assoc($get_data);
+
+    $id_barang = $row['kode_barang'] ?? null;
+    $jumlah = $row['jumlah'] ?? null;
+
+    if (!$id_barang || !$jumlah) {
+        echo json_encode(['status' => 'error', 'message' => 'Data barang tidak ditemukan.']);
+        exit();
+    }
 
     // Update status peminjaman ke 'Dikembalikan' + tanggal pengembalian
     $query = mysqli_query($koneksi, "
@@ -18,9 +25,14 @@ if (isset($_POST['id'])) {
         WHERE id = '$id'
     ");
 
-    // Jika berhasil, update status barang ke 'Tersedia'
-    if ($query && $kode_barang) {
-        mysqli_query($koneksi, "UPDATE tb_barang SET status = 'Tersedia' WHERE id_barang = '$kode_barang'");
+    // Jika berhasil, tambahkan stok_tersedia
+    if ($query) {
+        mysqli_query($koneksi, "
+            UPDATE tb_barang 
+            SET stok_tersedia = stok_tersedia + $jumlah 
+            WHERE id_barang = $id_barang
+        ");
+
         echo json_encode(['status' => 'success']);
     } else {
         echo json_encode([

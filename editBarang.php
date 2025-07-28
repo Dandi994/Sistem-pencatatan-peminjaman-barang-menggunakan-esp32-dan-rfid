@@ -122,7 +122,9 @@ $data = mysqli_fetch_assoc($query);
                         <option value="Remote Tv" <?= $data['jenis_barang'] == 'Remote Tv' ? 'selected' : '' ?>>Remote Tv</option>
                         <option value="Kabel HDMI" <?= $data['jenis_barang'] == 'Kabel HDMI' ? 'selected' : '' ?>>Kabel HDMI</option>
                     </select>
-
+                </div>
+                <div class="mb-3">
+                    <input type="number" class="form-control" placeholder="Jumlah Barang" name="stok_total" min="1" value="<?= $data['stok_total']; ?>">
                 </div>
                 <input type="submit" class="btn btn-primary" value="Submit"></input>
             </form>

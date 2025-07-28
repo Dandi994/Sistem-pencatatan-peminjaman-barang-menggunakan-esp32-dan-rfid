@@ -61,9 +61,6 @@ $hasil = mysqli_query($koneksi, $query);
             <h5 class="fw-bold">Tambah Barang</h5>
             <form action="proses/insert_barang.php" method="post">
                 <div class="mb-3">
-                    <input type="text" name="kodeBarang" class="form-control" placeholder="Kode Barang">
-                </div>
-                <div class="mb-3">
                     <input type="text" name="namaBarang" class="form-control" placeholder="Nama Barang">
                 </div>
                 <div class="mb-3">
@@ -77,6 +74,9 @@ $hasil = mysqli_query($koneksi, $query);
                         <option>Perkakas</option>
                     </select>
                 </div>
+                <div class="mb-3">
+                    <input class="form-control" placeholder="Jumlah Barang" type="number" name="stok_total" min="1">
+                </div>
                 <input type="submit" class="btn btn-primary" value="Submit"></input>
             </form>
         </div>
@@ -89,7 +89,9 @@ $hasil = mysqli_query($koneksi, $query);
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th>Jenis Barang</th>
-                        <th>Action</th>
+                        <th>Stok Total</th>
+                        <th>Stok Tersedia</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,6 +101,8 @@ $hasil = mysqli_query($koneksi, $query);
                             <td><?= $row['id_barang']; ?></td>
                             <td><?= $row['nama_barang']; ?></td>
                             <td><?= $row['jenis_barang']; ?></td>
+                            <td><?= $row['stok_total']; ?></td>
+                            <td><?= $row['stok_tersedia']; ?></td>
                             <td>
                                 <a href="editBarang.php?id= <?= $row['id_barang']; ?>" class="btn btn-sm btn-success">Edit</a>
                                 <a href="proses/hapus_barang.php?id= <?= $row['id_barang']; ?>" class="btn btn-sm btn-danger">Delete</a>

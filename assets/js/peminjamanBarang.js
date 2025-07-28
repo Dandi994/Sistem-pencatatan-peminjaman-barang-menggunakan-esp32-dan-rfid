@@ -16,6 +16,7 @@
                                 $('#uid').val(data.uid);
                                 $('#kelas').val(data.kelas);
                                 $('#prodi').val(data.prodi);
+                                $('#semester').val(data.semester);
 
                                 // Stop polling if UID is valid
                                 clearInterval(uidPolling);
@@ -28,6 +29,7 @@
                                 $('#uid').val('');
                                 $('#kelas').val('');
                                 $('#prodi').val('');
+                                $('#semster').val('');
                             }
                         }
                     },
@@ -44,6 +46,7 @@
             $('#uid').val('');
             $('#kelas').val('');
             $('#prodi').val('');
+            $('#semster').val('');
 
             // Hentikan polling jika sedang berjalan
             if (uidPolling) clearInterval(uidPolling);
@@ -65,40 +68,63 @@
             });
         });
 
-        $(document).ready(function() {
-            $.ajax({
-                url: "proses/get_barang.php",
-                method: "GET",
-                dataType: "json",
-                success: function(response) {
-                    const grouped = {};
+let dataBarang = [];
 
-                    // Kelompokkan berdasarkan jenis_barang
-                    response.forEach(function(item) {
-                        if (!grouped[item.jenis_barang]) {
-                            grouped[item.jenis_barang] = [];
-                        }
-                        grouped[item.jenis_barang].push(item);
-                    });
+$(document).ready(function () {
+  // Ambil data barang dari server
+  $.ajax({
+    url: "proses/get_barang.php",
+    method: "GET",
+    dataType: "json",
+    success: function (response) {
+      dataBarang = response;
 
-                    // Tambahkan hasil ke combo box
-                    for (const jenis in grouped) {
-                        const optgroup = $('<optgroup>', {
-                            label: jenis
-                        });
-                        grouped[jenis].forEach(function(barang) {
-                            optgroup.append(
-                                $('<option>', {
-                                    value: barang.id_barang,
-                                    text: barang.id_barang + ' - ' + barang.nama_barang
-                                })
-                            );
-                        });
-                        $('#barang').append(optgroup);
-                    }
-                },
-                error: function() {
-                    alert("Gagal mengambil data barang.");
-                }
-            });
-        });
+      // Isi hanya dropdown yang sudah ada saat halaman dimuat
+      $('.barang-select').each(function () {
+        populateSelect($(this));
+      });
+    },
+    error: function () {
+      alert("Gagal mengambil data barang.");
+    }
+  });
+
+  // Tambah baris baru
+  $('#tambah-baris').click(function () {
+    const $newRow = $(`
+      <tr>
+        <td>
+          <select name="barang[]" class="form-control barang-select" required>
+            <option disabled selected>Pilih Barang</option>
+          </select>
+        </td>
+        <td><input type="number" name="jumlah[]" class="form-control" min="1" required></td>
+        <td><button type="button" class="btn btn-danger hapus-baris">Hapus</button></td>
+      </tr>
+    `);
+
+    $('#tabel-barang tbody').append($newRow);
+
+    // Isi hanya dropdown pada baris baru
+    const $selectBaru = $newRow.find('.barang-select');
+    populateSelect($selectBaru);
+  });
+
+  // Hapus baris
+  $(document).on('click', '.hapus-baris', function () {
+    $(this).closest('tr').remove();
+  });
+});
+
+// Fungsi isi satu dropdown <select>
+function populateSelect($select) {
+  $select.empty().append('<option disabled selected>Pilih Barang</option>');
+  dataBarang.forEach(barang => {
+    $select.append(
+      $('<option>', {
+        value: barang.id_barang,
+        text: `${barang.id_barang} - ${barang.nama_barang}`
+      })
+    );
+  });
+}

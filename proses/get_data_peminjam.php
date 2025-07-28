@@ -18,16 +18,16 @@ if ($row = mysqli_fetch_assoc($result)) {
         $peminjaman = [];
         $query = mysqli_query($koneksi, "
             SELECT 
-                p.id,
-                p.semester, 
-                p.tgl_peminjaman, 
-                p.tgl_pengembalian, 
-                p.status, 
-                b.id_barang AS kode_barang, 
-                b.nama_barang
-            FROM tb_peminjaman p
-            JOIN tb_barang b ON p.kode_barang = b.id_barang
-            WHERE p.uid_peminjam = '$id_card'
+            p.id,
+            p.semester, 
+            p.tgl_peminjaman, 
+            p.tgl_pengembalian, 
+            p.status, 
+            p.jumlah,
+            b.nama_barang
+        FROM tb_peminjaman p
+        JOIN tb_barang b ON p.kode_barang = b.id_barang
+        WHERE p.uid_peminjam = '$id_card' AND p.status = 'Dipinjam'
         ");
 
         while ($row = mysqli_fetch_assoc($query)) {

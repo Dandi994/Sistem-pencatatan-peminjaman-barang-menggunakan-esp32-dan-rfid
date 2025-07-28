@@ -53,26 +53,33 @@ mysqli_query($koneksi, "DELETE FROM card_temp");
                 <div class="mb-3">
                     <input id="prodi" type="text" name="prodi" class="form-control" placeholder="Prodi" readonly>
                 </div>
+
                 <div class="mb-3">
-                    <select class="form-select" name="semester">
-                        <option selected disabled>Pilih Semester</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                    </select>
+                    <input id="semester" type="text" name="semester" class="form-control" placeholder="Semester" readonly>
                 </div>
-                <div class="mb-4">
-                    <select id="barang" class="form-select" name="kode_barang">
-                        <option selected disabled>Pilih Barang</option>
-                        <option value=""></option>
-                    </select>
-                </div>
-                <input type="submit" class="btn btn-primary submit-btn" value="Submit"></input>
+
+                <table class="table" id="tabel-barang">
+                    <thead>
+                        <tr>
+                            <th>Barang</th>
+                            <th>Jumlah</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select name="barang[]" class="form-control barang-select" required>
+                                    <option disabled selected>Pilih Barang</option>
+                                </select>
+                            </td>
+                            <td><input type="number" name="jumlah[]" class="form-control" min="1" required></td>
+                            <td><button type="button" class="btn btn-danger hapus-baris">Hapus</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" id="tambah-baris" class="btn btn-secondary">+ Tambah Barang</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>

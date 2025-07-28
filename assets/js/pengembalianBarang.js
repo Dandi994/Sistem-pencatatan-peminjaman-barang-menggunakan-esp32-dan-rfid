@@ -33,8 +33,8 @@
                             <td>${index + 1}</td>
                             <td>${res.uid}</td>
                             <td>${res.kelas}</td>
-                            <td>${item.kode_barang}</td>
                             <td>${item.nama_barang}</td>
+                            <td>${item.jumlah}</td>
                             <td>${item.tgl_peminjaman}</td>
                             <td>${item.tgl_pengembalian ?? '-'}</td>
                             <td>${item.status}</td>
